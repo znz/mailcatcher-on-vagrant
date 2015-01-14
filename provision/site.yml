@@ -1,0 +1,26 @@
+---
+- hosts: all
+  sudo: yes
+  roles:
+  - role: znzj.ja_jp
+    ja_jp_install_packages:
+    - lv
+    - nkf
+    - w3m
+    - autoconf
+    - bison
+    - build-essential
+    - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libsqlite3-dev
+  - role: znzj.rbenv
+    rbenv_ruby_version: "2.1.5"
+    rbenv_gems:
+    - rbenv-rehash
+    - bundler
+    - mailcatcher
+  tasks:
+  - lineinfile: dest=/etc/rc.local line="/opt/rbenv/shims/mailcatcher --ip 0.0.0.0" insertbefore=exit
